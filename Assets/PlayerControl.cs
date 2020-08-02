@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody2D rb;
-
+    public Transform player;
 
     // Movement Function
     Vector2 Movement(float x, float y)
@@ -26,6 +26,13 @@ public class PlayerControl : MonoBehaviour
         int moveSpeed = 5;
         int jumpVelocity = 30;
 
+/*        while(player.position.y < 1)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.velocity = Movement(-moveSpeed, jumpVelocity);
+            }
+        }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Movement(-moveSpeed, jumpVelocity);
