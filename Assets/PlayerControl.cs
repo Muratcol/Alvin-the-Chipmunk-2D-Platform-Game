@@ -26,13 +26,7 @@ public class PlayerControl : MonoBehaviour
         int moveSpeed = 5;
         int jumpVelocity = 30;
 
-/*        while(player.position.y < 1)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.velocity = Movement(-moveSpeed, jumpVelocity);
-            }
-        }*/
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Movement(-moveSpeed, jumpVelocity);
