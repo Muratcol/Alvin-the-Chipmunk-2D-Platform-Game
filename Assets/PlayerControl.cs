@@ -14,7 +14,8 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb;
     private Animator anim;
-
+    private enum State {idle, running, jumping}
+    private State state = State.idle;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,37 +35,47 @@ public class PlayerControl : MonoBehaviour
     {
         int moveSpeed = 5;
         int jumpVelocity = 30;
+        
         float hDirection = Input.GetAxis("Horizontal");
         float vDirection = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Movement(-moveSpeed, jumpVelocity);
-            anim.SetBool("floating", true);
+            charState(2);
         }
 
         if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
             rb.velocity = Movement(-moveSpeed, rb.velocity.y);
-            anim.SetBool("running", true);
-            anim.SetBool("floating", false);
+            charState(1);
 
         }
         else if(hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
             rb.velocity = Movement(moveSpeed, rb.velocity.y);
-            anim.SetBool("running", true);
-            anim.SetBool("floating", false);
+            charState(1);
         }
         else
         {
             rb.velocity = Movement(0, rb.velocity.y);
-            anim.SetBool("running", false);
-            anim.SetBool("floating", false);
+            charState(0);
         }
+    }
 
-
+    void charState(int state)
+    {
+        if (state == 1)
+        {
+            anim.SetInteger("state", 1);
+        }
+        else if (state == 2)
+        {
+            anim.SetInteger("state", 2);
+        }
+        else
+            anim.SetInteger("state", 0);
     }
 }
