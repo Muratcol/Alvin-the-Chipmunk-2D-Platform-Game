@@ -42,40 +42,30 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Movement(-moveSpeed, jumpVelocity);
-            charState(2);
+            state = State.jumping;
         }
 
         if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
             rb.velocity = Movement(-moveSpeed, rb.velocity.y);
-            charState(1);
+            state = State.running;
 
         }
         else if(hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
             rb.velocity = Movement(moveSpeed, rb.velocity.y);
-            charState(1);
+            state = State.running;
         }
         else
         {
             rb.velocity = Movement(0, rb.velocity.y);
-            charState(0);
+            state = State.idle;
         }
+        anim.SetInteger("state", (int)state);
+
     }
 
-    void charState(int state)
-    {
-        if (state == 1)
-        {
-            anim.SetInteger("state", 1);
-        }
-        else if (state == 2)
-        {
-            anim.SetInteger("state", 2);
-        }
-        else
-            anim.SetInteger("state", 0);
-    }
+
 }
