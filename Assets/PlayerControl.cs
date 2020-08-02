@@ -12,8 +12,15 @@ using UnityEngine.SocialPlatforms;
 public class PlayerControl : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody2D rb;
-    public Animator anim;
+    private Rigidbody2D rb;
+    private Animator anim;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
 
     // Movement Function
     Vector2 Movement(float x, float y)
@@ -27,7 +34,8 @@ public class PlayerControl : MonoBehaviour
     {
         int moveSpeed = 5;
         int jumpVelocity = 30;
-
+        float hDirection = Input.GetAxis("Horizontal");
+        float vDirection = Input.GetAxis("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -35,7 +43,7 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("floating", true);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
             rb.velocity = Movement(-moveSpeed, rb.velocity.y);
@@ -43,7 +51,7 @@ public class PlayerControl : MonoBehaviour
             anim.SetBool("floating", false);
 
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if(hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
             rb.velocity = Movement(moveSpeed, rb.velocity.y);
