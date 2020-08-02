@@ -230,8 +230,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357229159}
   m_LocalRotation: {x: 0.006563833, y: -0, z: -0, w: 0.9999785}
-  m_LocalPosition: {x: 4.73, y: 1.31, z: 0.12}
-  m_LocalScale: {x: 0.4716717, y: 0.44008693, z: 1}
+  m_LocalPosition: {x: 8.84, y: 5.72, z: 0.18}
+  m_LocalScale: {x: 0.8328055, y: 0.7381341, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -298,10 +298,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 50
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -342,9 +342,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 357229159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9283181e9f25c488d5dff7bd7ffa45, type: 3}
+  m_Script: {fileID: 11500000, guid: 64bac37d2c2d0c44f9d403ca68270230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 357229162}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
