@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
     private TilemapCollider2D compCol;
     public BoxCollider2D charCol;
     private bool isJumping;
+    [SerializeField] private LayerMask ground; 
+
 
     private enum State { idle, running, jumping, falling }
     private State state = State.idle;
@@ -21,8 +23,7 @@ public class PlayerControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        compCol = GetComponent<TilemapCollider2D>();
-        charCol = GetComponent<BoxCollider2D>();
+        coll = GetComponent<Collider2D>();
 
     }
 
@@ -55,20 +56,36 @@ public class PlayerControl : MonoBehaviour
         if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
-            if(isJumping) state = State.jumping;
-            else state = State.running;
-            
-
+            if (isJumping) state = State.jumping;
+            else
+            {
+                state = State.running;
+                isJumping = false;
+            }
         }
         else if (hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
             if (isJumping) state = State.jumping;
-            else state = State.running;
+            else
+            {
+                state = State.running;
+                isJumping = false;
+            }
+        }
+        else if (!coll.IsTouchingLayers(ground) && isJumping == false)
+        {
+            state = State.falling;
         }
         else
         {
-            state = State.idle;
+            if (isJumping) state = State.jumping;
+            else 
+            {
+                state = State.idle;
+                isJumping = false;
+            }
+            
         }
         anim.SetInteger("state", (int)state);
 
@@ -79,7 +96,7 @@ public class PlayerControl : MonoBehaviour
     void Jump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && coll.IsTouchingLayers(ground))
         {
             rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
             state = State.jumping;
