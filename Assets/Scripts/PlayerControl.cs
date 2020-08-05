@@ -3,10 +3,6 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector3;
-
-using System.Timers;
-using System.Diagnostics.Contracts;
-using System.Reflection;
 using UnityEngine.Tilemaps;
 
 public class PlayerControl : MonoBehaviour
@@ -19,7 +15,7 @@ public class PlayerControl : MonoBehaviour
     public BoxCollider2D charCol;
     private bool isJumping;
 
-    private enum State { idle, running, jumping }
+    private enum State { idle, running, jumping, falling }
     private State state = State.idle;
     private void Start()
     {
@@ -30,13 +26,15 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private bool OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
             rb.velocity = Vector2.zero;
+            return true;
         }
+        return false;
     }
 
     // Update is called once per frame
@@ -57,13 +55,16 @@ public class PlayerControl : MonoBehaviour
         if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
-            state = State.running;
+            if(isJumping) state = State.jumping;
+            else state = State.running;
+            
 
         }
         else if (hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
-            state = State.running;
+            if (isJumping) state = State.jumping;
+            else state = State.running;
         }
         else
         {
@@ -81,6 +82,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            state = State.jumping;
             isJumping = true;
         }
 
