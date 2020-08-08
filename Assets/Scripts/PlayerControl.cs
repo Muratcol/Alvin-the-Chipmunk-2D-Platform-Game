@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour
         }
         return false;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -57,6 +57,10 @@ public class PlayerControl : MonoBehaviour
         {
             transform.localScale = new Vector2(-1, 1);
             if (isJumping) state = State.jumping;
+            else if (!coll.IsTouchingLayers(ground) && isJumping == false)
+            {
+                state = State.falling;
+            }
             else
             {
                 state = State.running;
@@ -67,6 +71,10 @@ public class PlayerControl : MonoBehaviour
         {
             transform.localScale = new Vector2(1, 1);
             if (isJumping) state = State.jumping;
+            else if (!coll.IsTouchingLayers(ground) && isJumping == false)
+            {
+                state = State.falling;
+            }
             else
             {
                 state = State.running;
@@ -99,8 +107,15 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && coll.IsTouchingLayers(ground))
         {
             rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
-            state = State.jumping;
             isJumping = true;
+            if(rb.velocity.y < .1f)
+            {
+                state = State.falling;
+            }
+            else
+            {
+                state = State.jumping;
+            }
         }
 
     }
