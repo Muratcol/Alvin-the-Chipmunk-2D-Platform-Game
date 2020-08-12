@@ -14,8 +14,8 @@ public class PlayerControl : MonoBehaviour
     private TilemapCollider2D compCol;
     public BoxCollider2D charCol;
     private bool isJumping;
-    [SerializeField] private LayerMask ground; 
-
+    [SerializeField] private LayerMask ground;
+    public int cherries = 0;
 
     private enum State { idle, running, jumping, falling }
     private State state = State.idle;
