@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     private bool isJumping;
     [SerializeField] private LayerMask ground;
     public int cherries = 0;
-
+    public float moveSpeed = 5f;
     private enum State { idle, running, jumping, falling }
     private State state = State.idle;
     private void Start()
@@ -39,17 +39,17 @@ public class PlayerControl : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float moveSpeed = 5f;
+        Movement();
+        Jump();
+        anim.SetInteger("state", (int)state);
+    }
+
+    private void Movement()
+    {
         float hDirection = Input.GetAxis("Horizontal");
         float vDirection = Input.GetAxis("Vertical");
-
-
-        Jump();
-
-
-
         Vector3 movement = new Vector3(hDirection, 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
 
@@ -91,20 +91,16 @@ public class PlayerControl : MonoBehaviour
         {
             if (isJumping && rb.velocity.y < .1f && !coll.IsTouchingLayers(ground)) state = State.falling;
             else if (isJumping) state = State.jumping;
-            else 
+            else
             {
                 state = State.idle;
                 isJumping = false;
             }
-            
-        }
-        anim.SetInteger("state", (int)state);
 
+        }
     }
 
-
-
-    void Jump()
+    private void Jump()
     {
 
         if (Input.GetKeyDown(KeyCode.Space) && coll.IsTouchingLayers(ground))
@@ -121,6 +117,15 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Collectable")
+        {
+            Destroy(collision.gameObject);
+            cherries += 1;
+        }
     }
 }
 
