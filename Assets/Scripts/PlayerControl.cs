@@ -56,9 +56,9 @@ public class PlayerControl : MonoBehaviour
         if (hDirection < 0)
         {
             transform.localScale = new Vector2(-1, 1);
-            if (isJumping && rb.velocity.y < .1f) state = State.falling;
-            else if(isJumping) state = State.jumping;
-            else if (!coll.IsTouchingLayers(ground) && isJumping == false)
+            if (isJumping && rb.velocity.y < .1f && !coll.IsTouchingLayers(ground)) state = State.falling;
+            else if (isJumping) state = State.jumping;
+            else if (!coll.IsTouchingLayers(ground) && !isJumping)
             {
                 state = State.falling;
             }
@@ -71,9 +71,9 @@ public class PlayerControl : MonoBehaviour
         else if (hDirection > 0)
         {
             transform.localScale = new Vector2(1, 1);
-            if (isJumping && rb.velocity.y < .1f) state = State.falling;
+            if (isJumping && rb.velocity.y < .1f && !coll.IsTouchingLayers(ground)) state = State.falling;
             else if (isJumping) state = State.jumping;
-            else if (!coll.IsTouchingLayers(ground) && isJumping == false)
+            else if (!coll.IsTouchingLayers(ground) && !isJumping)
             {
                 state = State.falling;
             }
@@ -89,7 +89,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (isJumping && rb.velocity.y < .1f) state = State.falling;
+            if (isJumping && rb.velocity.y < .1f && !coll.IsTouchingLayers(ground)) state = State.falling;
             else if (isJumping) state = State.jumping;
             else 
             {
