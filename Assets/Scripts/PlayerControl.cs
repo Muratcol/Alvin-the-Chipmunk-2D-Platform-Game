@@ -13,10 +13,13 @@ public class PlayerControl : MonoBehaviour
     private Collider2D coll;
     private TilemapCollider2D compCol;
     public BoxCollider2D charCol;
-    private bool isJumping;
+    
     [SerializeField] private LayerMask ground;
-    public int cherries = 0;
-    public float moveSpeed = 5f;
+    [SerializeField] private int cherries = 0;
+    [SerializeField] private float moveSpeed = 5f;
+
+
+    private bool isJumping;
     private enum State { idle, running, jumping, falling }
     private State state = State.idle;
     private void Start()
