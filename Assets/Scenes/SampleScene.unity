@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 377333572}
   - component: {fileID: 377333571}
   m_Layer: 5
-  m_Name: Text
+  m_Name: cherryCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 0
 --- !u!222 &377333572
 CanvasRenderer:
   m_ObjectHideFlags: 0

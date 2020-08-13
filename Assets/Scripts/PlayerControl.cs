@@ -4,7 +4,7 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector3;
 using UnityEngine.Tilemaps;
-
+using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private int cherries = 0;
     [SerializeField] private float moveSpeed = 5f;
-
+    [SerializeField] private Text cherryCounter;
 
     private bool isJumping;
     private enum State { idle, running, jumping, falling }
@@ -128,6 +128,7 @@ public class PlayerControl : MonoBehaviour
         {
             Destroy(collision.gameObject);
             cherries += 1;
+            cherryCounter.text = cherries.ToString();
         }
     }
 }
