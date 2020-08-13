@@ -11,7 +11,6 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D rb;
     private Animator anim;
     private Collider2D coll;
-    private TilemapCollider2D compCol;
     public BoxCollider2D charCol;
     
     [SerializeField] private LayerMask ground;
@@ -27,7 +26,6 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-
     }
 
     private bool OnCollisionEnter2D(Collision2D other)
