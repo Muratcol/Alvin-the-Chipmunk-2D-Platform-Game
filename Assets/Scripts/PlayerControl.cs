@@ -17,28 +17,16 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private int cherries = 0;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Text cherryCounter;
-
+    [SerializeField] private float hurtForce = 10f;
     private bool isJumping;
-    private enum State { idle, running, jumping, falling }
+    private enum State { idle, running, jumping, falling, hurt }
     private State state = State.idle;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-    }
-
-    private bool OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isJumping = false;
-            rb.velocity = Vector2.zero;
-            return true;
-        }
-        return false;
-    }
-    
+    } 
     // Update is called once per frame
     private void Update()
     {
@@ -128,6 +116,36 @@ public class PlayerControl : MonoBehaviour
             cherries += 1;
             cherryCounter.text = cherries.ToString();
         }
+    }
+    private bool OnCollisionEnter2D(Collision2D obj)
+    {
+        if (obj.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+            rb.velocity = Vector2.zero;
+            return true;
+        }
+        else if (obj.gameObject.CompareTag("Enemy"))
+        {
+            if(state == State.falling)
+            {
+                Destroy(obj.gameObject);
+            }
+            else
+            {
+                if(obj.gameObject.transform.position.x > transform.position.x)
+                {
+                    //Enemy is at right side of character. And character get damaged and move left
+                }
+                else
+                {
+                    //Enemy is at left side of character. And character get damaged and move right
+                }
+                state = State.hurt;
+            }
+            
+        }
+        return false;
     }
 }
 
