@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Text cherryCounter;
     [SerializeField] private float hurtForce = 10f;
+    [SerializeField] private float hurtAnimationDuration = 1.0f;
     private bool isJumping;
     private enum State { idle, running, jumping, falling, hurt }
     private State state = State.idle;
@@ -33,7 +34,16 @@ public class PlayerControl : MonoBehaviour
         if(state != State.hurt)
         {
             Movement();
-        }      
+        }
+        else
+        {
+            hurtAnimationDuration -= Time.deltaTime;
+            if (hurtAnimationDuration < 0)
+            {
+                state = State.idle;
+                hurtAnimationDuration = 0.5f;
+            }
+        }
         Jump();
         anim.SetInteger("state", (int)state);
     }
@@ -146,7 +156,8 @@ public class PlayerControl : MonoBehaviour
                 {
                     //Enemy is at left side of character. And character get damaged and move right
                     rb.velocity = new Vector2(hurtForce, rb.velocity.y);
-                }          
+                }
+                
             }
             
         }
