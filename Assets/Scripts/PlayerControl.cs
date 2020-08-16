@@ -30,7 +30,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Movement();
+        if(state != State.hurt)
+        {
+            Movement();
+        }      
         Jump();
         anim.SetInteger("state", (int)state);
     }
@@ -133,15 +136,17 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
-                if(obj.gameObject.transform.position.x > transform.position.x)
+                state = State.hurt;
+                if (obj.gameObject.transform.position.x > transform.position.x)
                 {
                     //Enemy is at right side of character. And character get damaged and move left
+                    rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
                 }
                 else
                 {
                     //Enemy is at left side of character. And character get damaged and move right
-                }
-                state = State.hurt;
+                    rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+                }          
             }
             
         }
