@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257988807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.71, y: 2.28, z: 0}
+  m_LocalPosition: {x: 39.72, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -301,6 +301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMoveSpeed: 5
+  leftWaypoint: 0
+  rightWaypoint: 0
 --- !u!4 &357229160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1299590147846412673, guid: 6939dcf7522fd1e46aa1e9d2d90ef363,
@@ -1388,12 +1390,12 @@ PrefabInstance:
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.71
+      value: 39.72
       objectReference: {fileID: 0}
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.28
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
