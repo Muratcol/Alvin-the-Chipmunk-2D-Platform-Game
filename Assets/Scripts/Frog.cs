@@ -61,8 +61,7 @@ public class Frog : MonoBehaviour
         if(coll.IsTouchingLayers(ground) && facingLeft && keepMoving)
         {
             if (!coll.IsTouchingLayers(ground)) state = State.jumping;
-            Vector3 movement = new Vector3(-2f, 8f, 0f);
-            transform.position += movement * Time.deltaTime * jumpLength;
+            rb.velocity = new Vector2(-jumpLength, jumpHeight);
             if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
             {
                 state = State.falling;
@@ -71,8 +70,7 @@ public class Frog : MonoBehaviour
         else if(coll.IsTouchingLayers(ground) && !facingLeft && keepMoving)
         {
             if(!coll.IsTouchingLayers(ground)) state = State.jumping;
-            Vector3 movement = new Vector3(2f, 8f, 0f);
-            transform.position += movement * Time.deltaTime * jumpLength;
+            rb.velocity = new Vector2(jumpLength, jumpHeight);
             if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
             {
                 state = State.falling;
