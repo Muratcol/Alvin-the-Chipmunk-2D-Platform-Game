@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    [SerializeField] private float enemyMoveSpeed = 5f;
-    [SerializeField] private float leftWaypoint = 0;
-    [SerializeField] private float rightWaypoint = 0;
+    private Collider2D coll;
+
+    [SerializeField] private float jumpLength;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private float leftWaypoint;
+    [SerializeField] private float rightWaypoint;
+
+    [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
     
@@ -21,13 +26,26 @@ public class Frog : MonoBehaviour
     void Update()
     {
         movement();
-    }
+/*        if (facingLeft)
+        {
+            if(transform.position.x > leftWaypoint)
+            {
 
+            }
+            else
+            {
+                facingLeft = false;
+            }
+        }*/
+        
+    }
 
     void movement()
     {
-        float hDirection = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(0, 1f, 0f);
-        transform.position += movement * Time.deltaTime * enemyMoveSpeed;
+        if(coll.IsTouchingLayers(ground))
+        {
+            Vector3 movement = new Vector3(1, 1f, 0f);
+            transform.position += movement * Time.deltaTime * jumpLength;
+        }
     }
 }
