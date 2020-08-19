@@ -5,7 +5,11 @@ using UnityEngine;
 public class Frog : MonoBehaviour
 {
     [SerializeField] private float enemyMoveSpeed = 5f;
+    [SerializeField] private float leftWaypoint = 0;
+    [SerializeField] private float rightWaypoint = 0;
 
+    private bool facingLeft = true;
+    
 
     // Start is called before the first frame update
     void Start()
