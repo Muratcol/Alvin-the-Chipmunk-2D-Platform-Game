@@ -16,12 +16,14 @@ public class Frog : MonoBehaviour
     [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
-    private enum State { idle, running, jumping, falling, hurt }
+    private enum State { idle, jumping, falling }
     private State state = State.idle;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        coll = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class Frog : MonoBehaviour
         if(coll.IsTouchingLayers(ground))
         {
             state = State.jumping;
-            Vector3 movement = new Vector3(1, 1f, 0f);
+            Vector3 movement = new Vector3(1f, 4f, 0f);
             transform.position += movement * Time.deltaTime * jumpLength;
             if(rb.velocity.y < .1f)
             {
