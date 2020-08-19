@@ -16,6 +16,8 @@ public class Frog : MonoBehaviour
     [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
+    [SerializeField] private float idleDuration = 2.0f;
+    private bool keepMoving = true;
     private enum State { idle, jumping, falling }
     private State state = State.idle;
     // Start is called before the first frame update
@@ -32,11 +34,27 @@ public class Frog : MonoBehaviour
 /*        movement();*/
         if (transform.position.x <= leftWaypoint)
         {
-            facingLeft = false;        
+            facingLeft = false;
+            keepMoving = false;
+            idleDuration -= Time.deltaTime;
+            if (idleDuration < 0)
+            {
+                state = State.idle;
+                idleDuration = 2f;
+                keepMoving = true;
+            }
         }
         else if(transform.position.x >= rightWaypoint)
         {
             facingLeft = true;
+            keepMoving = false;
+            idleDuration -= Time.deltaTime;
+            if (idleDuration < 0)
+            {
+                state = State.idle;
+                idleDuration = 2f;
+                keepMoving = true;
+            }
         }
         movement();
         anim.SetInteger("state", (int)state);
@@ -45,7 +63,7 @@ public class Frog : MonoBehaviour
 
     void movement()
     {
-        if(coll.IsTouchingLayers(ground) && facingLeft)
+        if(coll.IsTouchingLayers(ground) && facingLeft && keepMoving)
         {
             state = State.jumping;
             Vector3 movement = new Vector3(-1f, 4f, 0f);
@@ -54,11 +72,17 @@ public class Frog : MonoBehaviour
             {
                 state = State.falling;
             }
+
         }
-        else if(coll.IsTouchingLayers(ground) && !facingLeft)
+        else if(coll.IsTouchingLayers(ground) && !facingLeft && keepMoving)
         {
+            state = State.jumping;
             Vector3 movement = new Vector3(1f, 4f, 0f);
             transform.position += movement * Time.deltaTime * jumpLength;
+            if (rb.velocity.y < .1f)
+            {
+                state = State.falling;
+            }
         }
     }
 }
