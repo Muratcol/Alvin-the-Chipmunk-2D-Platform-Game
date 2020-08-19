@@ -34,27 +34,22 @@ public class Frog : MonoBehaviour
 /*        movement();*/
         if (transform.position.x <= leftWaypoint)
         {
+            transform.localScale = new Vector2(-1, 1);
             facingLeft = false;
-            keepMoving = false;
-            idleDuration -= Time.deltaTime;
-            if (idleDuration < 0)
-            {
-                state = State.idle;
-                idleDuration = 2f;
-                keepMoving = true;
-            }
+            
         }
         else if(transform.position.x >= rightWaypoint)
         {
+            transform.localScale = new Vector2(1, 1);
             facingLeft = true;
-            keepMoving = false;
+            /*keepMoving = false;
             idleDuration -= Time.deltaTime;
             if (idleDuration < 0)
             {
                 state = State.idle;
                 idleDuration = 2f;
                 keepMoving = true;
-            }
+            }*/
         }
         movement();
         anim.SetInteger("state", (int)state);
@@ -65,24 +60,35 @@ public class Frog : MonoBehaviour
     {
         if(coll.IsTouchingLayers(ground) && facingLeft && keepMoving)
         {
-            state = State.jumping;
-            Vector3 movement = new Vector3(-1f, 4f, 0f);
+            if (!coll.IsTouchingLayers(ground)) state = State.jumping;
+            Vector3 movement = new Vector3(-2f, 8f, 0f);
             transform.position += movement * Time.deltaTime * jumpLength;
-            if(rb.velocity.y < .1f)
+            if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
             {
                 state = State.falling;
             }
-
         }
         else if(coll.IsTouchingLayers(ground) && !facingLeft && keepMoving)
         {
-            state = State.jumping;
-            Vector3 movement = new Vector3(1f, 4f, 0f);
+            if(!coll.IsTouchingLayers(ground)) state = State.jumping;
+            Vector3 movement = new Vector3(2f, 8f, 0f);
             transform.position += movement * Time.deltaTime * jumpLength;
-            if (rb.velocity.y < .1f)
+            if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
             {
                 state = State.falling;
             }
         }
+        if (coll.IsTouchingLayers(ground))
+        {
+            keepMoving = false;
+            idleDuration -= Time.deltaTime;
+            state = State.idle;
+            if (idleDuration < 0)
+            {
+                idleDuration = 2f;
+                keepMoving = true;
+            }
+        }
+            
     }
 }
