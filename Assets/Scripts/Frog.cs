@@ -29,33 +29,35 @@ public class Frog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement();
-        /*        if (facingLeft)
-                {
-                    if(transform.position.x > leftWaypoint)
-                    {
-
-                    }
-                    else
-                    {
-                        facingLeft = false;
-                    }
-                }*/
-        anim.SetInteger("state", (int)state);
+        if (transform.position.x > leftWaypoint)
+        {
+            facingLeft = true;
+            movement();
+        }
+        else if(transform.position.x < rightWaypoint)
+        {
+            facingLeft = false;
+            movement();
+        }
+/*        anim.SetInteger("state", (int)state);*/
 
     }
 
     void movement()
     {
-        if(coll.IsTouchingLayers(ground))
+        if(coll.IsTouchingLayers(ground) && !facingLeft)
         {
             state = State.jumping;
-            Vector3 movement = new Vector3(1f, 4f, 0f);
+            Vector3 movement = new Vector3(-1f, 4f, 0f);
             transform.position += movement * Time.deltaTime * jumpLength;
             if(rb.velocity.y < .1f)
             {
                 state = State.falling;
             }
+        }
+        else if(coll.IsTouchingLayers(ground) && facingLeft)
+        {
+            Vector3 movement = new Vector3(1f, 4f, 0f);
         }
     }
 }
