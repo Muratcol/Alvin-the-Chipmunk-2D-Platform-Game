@@ -31,62 +31,36 @@ public class Frog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-/*        movement();*/
         if (transform.position.x <= leftWaypoint)
         {
             transform.localScale = new Vector2(-1, 1);
             facingLeft = false;
-            
+            state = State.jumping;
         }
         else if(transform.position.x >= rightWaypoint)
         {
             transform.localScale = new Vector2(1, 1);
             facingLeft = true;
-            /*keepMoving = false;
-            idleDuration -= Time.deltaTime;
-            if (idleDuration < 0)
-            {
-                state = State.idle;
-                idleDuration = 2f;
-                keepMoving = true;
-            }*/
+            state = State.jumping;
         }
-        movement();
+        if (coll.IsTouchingLayers(ground)) state = State.idle;
+        else if (rb.velocity.y > .1f && !coll.IsTouchingLayers(ground)) state = State.jumping;
+        else if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground)) state = State.falling;
+
         anim.SetInteger("state", (int)state);
 
     }
 
     void movement()
     {
-        if(coll.IsTouchingLayers(ground) && facingLeft && keepMoving)
-        {
-            if (!coll.IsTouchingLayers(ground)) state = State.jumping;
+        if(coll.IsTouchingLayers(ground) && facingLeft)
+        {       
             rb.velocity = new Vector2(-jumpLength, jumpHeight);
-            if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
-            {
-                state = State.falling;
-            }
         }
-        else if(coll.IsTouchingLayers(ground) && !facingLeft && keepMoving)
+        else if(coll.IsTouchingLayers(ground) && !facingLeft)
         {
-            if(!coll.IsTouchingLayers(ground)) state = State.jumping;
-            rb.velocity = new Vector2(jumpLength, jumpHeight);
-            if (rb.velocity.y < .1f && !coll.IsTouchingLayers(ground))
-            {
-                state = State.falling;
-            }
+            rb.velocity = new Vector2(jumpLength, jumpHeight);          
         }
-        if (coll.IsTouchingLayers(ground))
-        {
-            keepMoving = false;
-            idleDuration -= Time.deltaTime;
-            state = State.idle;
-            if (idleDuration < 0)
-            {
-                idleDuration = 2f;
-                keepMoving = true;
-            }
-        }
-            
+
     }
 }

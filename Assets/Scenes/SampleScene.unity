@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 257988809}
   - component: {fileID: 257988808}
   - component: {fileID: 257988813}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257988807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.44, y: -1.04, z: 0}
+  m_LocalPosition: {x: 49.97, y: -1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f49b3f11d0e3d4eae2dcff6e61caef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpLength: 50
+  jumpLength: 5
   jumpHeight: 5
   leftWaypoint: 35.95
   rightWaypoint: 53.74
@@ -308,6 +308,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 512
+  idleDuration: 2
 --- !u!4 &357229160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1299590147846412673, guid: 6939dcf7522fd1e46aa1e9d2d90ef363,
@@ -1277,12 +1278,12 @@ PrefabInstance:
     - target: {fileID: 1299590147846412673, guid: 6939dcf7522fd1e46aa1e9d2d90ef363,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.58
+      value: 41.1
       objectReference: {fileID: 0}
     - target: {fileID: 1299590147846412673, guid: 6939dcf7522fd1e46aa1e9d2d90ef363,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.49
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 1299590147846412673, guid: 6939dcf7522fd1e46aa1e9d2d90ef363,
         type: 3}
@@ -1425,12 +1426,12 @@ PrefabInstance:
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.44
+      value: 49.97
       objectReference: {fileID: 0}
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.04
+      value: -1.09
       objectReference: {fileID: 0}
     - target: {fileID: 3557928169652434782, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
@@ -1486,6 +1487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544582155171129998, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7175446473259160042, guid: 8a3ef1e759e8b1c4cbeca7baa3a34cba,
         type: 3}
