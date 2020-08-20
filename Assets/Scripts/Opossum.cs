@@ -16,8 +16,6 @@ public class Opossum : MonoBehaviour
 
     private bool facingLeft = true;
 
-    private enum State { idle, jumping, falling }
-    private State state = State.idle;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,29 +27,27 @@ public class Opossum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (transform.position.x <= leftWaypoint)
         {
             transform.localScale = new Vector2(-1, 1);
             facingLeft = false;
-            movement();
         }
         else if (transform.position.x >= rightWaypoint)
         {
             transform.localScale = new Vector2(1, 1);
-            facingLeft = true;
-            movement();
+            facingLeft = true;          
         }
+        movement();
 
     }
 
     void movement()
     {
-        if (coll.IsTouchingLayers(ground) && facingLeft)
+        if (facingLeft)
         {
             rb.velocity = new Vector2(-jumpLength, 0);
         }
-        else if (coll.IsTouchingLayers(ground) && !facingLeft)
+        else if (!facingLeft)
         {
             rb.velocity = new Vector2(jumpLength, 0);
         }

@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private int cherries = 0;
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpingHeight;
     [SerializeField] private Text cherryCounter;
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private float hurtAnimationDuration = 1.0f;
@@ -107,7 +108,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && coll.IsTouchingLayers(ground))
         {
-            rb.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, jumpingHeight), ForceMode2D.Impulse);
             isJumping = true;
             if(rb.velocity.y < .1f)
             {
