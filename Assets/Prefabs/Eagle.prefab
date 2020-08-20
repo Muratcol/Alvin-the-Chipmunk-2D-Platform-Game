@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8511922341572510930}
   - component: {fileID: 7481082998197703957}
   - component: {fileID: 5187800756930563060}
+  - component: {fileID: 5178078194171963130}
   m_Layer: 0
   m_Name: Eagle
   m_TagString: Untagged
@@ -47,7 +48,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.28328323, y: -0.3981285}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -58,7 +59,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5665665, y: 1.5206299}
   m_EdgeRadius: 0
 --- !u!212 &8511922341572510930
 SpriteRenderer:
@@ -150,3 +151,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5178078194171963130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3116323839766020090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c45cf43321b164cb3b8786b7cd78be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

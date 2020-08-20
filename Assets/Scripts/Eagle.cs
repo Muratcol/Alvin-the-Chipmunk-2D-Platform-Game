@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class Opossum : MonoBehaviour
+public class Eagle : MonoBehaviour
 {
     private Collider2D coll;
 
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float leftWaypoint;
-    [SerializeField] private float rightWaypoint;
+    [SerializeField] private float jumpLength;
     public Rigidbody2D rb;
     private Animator anim;
     [SerializeField] private LayerMask ground;
@@ -27,16 +25,7 @@ public class Opossum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x <= leftWaypoint)
-        {
-            transform.localScale = new Vector2(-1, 1);
-            facingLeft = false;
-        }
-        else if (transform.position.x >= rightWaypoint)
-        {
-            transform.localScale = new Vector2(1, 1);
-            facingLeft = true;          
-        }
+
         movement();
 
     }
@@ -45,11 +34,11 @@ public class Opossum : MonoBehaviour
     {
         if (facingLeft)
         {
-            rb.velocity = new Vector2(-moveSpeed, 0);
+            rb.velocity = new Vector2(-jumpLength, 0);
         }
         else if (!facingLeft)
         {
-            rb.velocity = new Vector2(moveSpeed, 0);
+            rb.velocity = new Vector2(jumpLength, 0);
         }
 
     }
