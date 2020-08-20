@@ -12,10 +12,9 @@ public class Eagle : MonoBehaviour
     [SerializeField] private float flightRangeBottom;
     public Rigidbody2D rb;
     private Animator anim;
-    [SerializeField] private LayerMask ground;
 
-    private bool atTop;
-    private bool atBottom;
+    private bool atTop = true;
+    private bool atBottom = false;
 
     // Start is called before the first frame update
     void Start()
