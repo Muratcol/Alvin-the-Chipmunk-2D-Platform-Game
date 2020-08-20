@@ -7,12 +7,15 @@ public class Eagle : MonoBehaviour
 {
     private Collider2D coll;
 
-    [SerializeField] private float jumpLength;
+    private float flightSpeed = 5;
+    [SerializeField] private float flightRangeTop;
+    [SerializeField] private float flightRangeBottom;
     public Rigidbody2D rb;
     private Animator anim;
     [SerializeField] private LayerMask ground;
 
-    private bool facingLeft = true;
+    private bool atTop;
+    private bool atBottom;
 
     // Start is called before the first frame update
     void Start()
@@ -25,20 +28,29 @@ public class Eagle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.position.y >= flightRangeTop && !atTop)
+        {
+            atTop = true;
+            atBottom = false;
+        }
+        else if (transform.position.y <= flightRangeBottom && !atBottom)
+        {
+            atTop = false;
+            atBottom = true;
+        }
         movement();
 
     }
 
     void movement()
     {
-        if (facingLeft)
+        if (atTop)
         {
-            rb.velocity = new Vector2(-jumpLength, 0);
+            rb.velocity = new Vector2(0, -flightSpeed);
         }
-        else if (!facingLeft)
+        else if (atBottom)
         {
-            rb.velocity = new Vector2(jumpLength, 0);
+            rb.velocity = new Vector2(0, flightSpeed);
         }
 
     }

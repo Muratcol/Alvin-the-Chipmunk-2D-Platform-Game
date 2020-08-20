@@ -117,6 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5437ef7ba4f1f0141aae5e8a9705c958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
+  leftWaypoint: 0
+  rightWaypoint: 0
+  rb: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &7184759741369166785
 Animator:
   serializedVersion: 3

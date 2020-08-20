@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299590147846412686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.13, y: 5.6, z: 0}
+  m_LocalPosition: {x: 8.13, y: 5.606, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08730376, y: -0.2897941}
+  m_Offset: {x: 0.045871496, y: -0.42574382}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2185583, y: 1.4875295}
+  m_Size: {x: 0.63036776, y: 1.0935521}
   m_EdgeRadius: 0
 --- !u!114 &1299590147846412677
 MonoBehaviour:
@@ -146,6 +146,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   charCol: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  cherries: 0
+  moveSpeed: 5
+  jumpingHeight: 0
+  cherryCounter: {fileID: 0}
+  hurtForce: 10
+  hurtAnimationDuration: 1
 --- !u!95 &1299590147846412676
 Animator:
   serializedVersion: 3
