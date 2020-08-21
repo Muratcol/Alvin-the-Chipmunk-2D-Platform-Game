@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Collectable
   - Enemy
+  - Eagle
+  - Frog
+  - Opossum
   layers:
   - Default
   - TransparentFX
