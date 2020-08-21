@@ -124,9 +124,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Frog frog = collision.gameObject.GetComponent<Frog>();
         if(collision.tag == "Collectable")
         {
-            Destroy(collision.gameObject);
+            /*            Destroy(collision.gameObject);*/
+            frog.JumpedOn();
             cherries += 1;
             cherryCounter.text = cherries.ToString();
         }
