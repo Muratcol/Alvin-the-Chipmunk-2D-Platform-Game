@@ -16,8 +16,6 @@ public class Frog : MonoBehaviour
     [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
-    [SerializeField] private float idleDuration = 2.0f;
-    private bool keepMoving = true;
     private enum State { idle, jumping, falling }
     private State state = State.idle;
     // Start is called before the first frame update

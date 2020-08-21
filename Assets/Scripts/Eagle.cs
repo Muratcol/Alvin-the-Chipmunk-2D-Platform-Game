@@ -53,4 +53,12 @@ public class Eagle : MonoBehaviour
         }
 
     }
+    public void JumpedOn()
+    {
+        anim.SetTrigger("Death");
+    }
+    private void Death()
+    {
+        Destroy(this.gameObject);
+    }
 }

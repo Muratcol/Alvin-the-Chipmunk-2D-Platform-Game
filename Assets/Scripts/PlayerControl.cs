@@ -142,31 +142,54 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = Vector2.zero;
             return true;
         }
-        else if (obj.gameObject.CompareTag("Enemy"))
+        else if (obj.gameObject.CompareTag("Opossum"))
         {
             if(state == State.falling)
             {
                 opossum.JumpedOn();
+            }
+            else
+            {
+                characterHurt(obj);
+            }          
+        }
+        else if (obj.gameObject.CompareTag("Frog"))
+        {
+            if (state == State.falling)
+            {
                 frog.JumpedOn();
             }
             else
             {
-                state = State.hurt;
-                if (obj.gameObject.transform.position.x > transform.position.x)
-                {
-                    //Enemy is at right side of character. And character get damaged and move left
-                    rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
-                }
-                else
-                {
-                    //Enemy is at left side of character. And character get damaged and move right
-                    rb.velocity = new Vector2(hurtForce, rb.velocity.y);
-                }
-                
+                characterHurt(obj);
             }
-            
+        }
+        else if (obj.gameObject.CompareTag("Eagle"))
+        {
+            if (state == State.falling)
+            {
+                eagle.JumpedOn();
+            }
+            else
+            {
+                characterHurt(obj);
+            }
         }
         return false;
+    }
+    private void characterHurt(Collision2D obj)
+    {
+        state = State.hurt;
+        if (obj.gameObject.transform.position.x > transform.position.x)
+        {
+            //Enemy is at right side of character. And character get damaged and move left
+            rb.velocity = new Vector2(-hurtForce, rb.velocity.y);
+        }
+        else
+        {
+            //Enemy is at left side of character. And character get damaged and move right
+            rb.velocity = new Vector2(hurtForce, rb.velocity.y);
+        }
     }
 }
 
