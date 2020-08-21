@@ -124,17 +124,17 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Frog frog = collision.gameObject.GetComponent<Frog>();
         if(collision.tag == "Collectable")
         {
-            /*            Destroy(collision.gameObject);*/
-            frog.JumpedOn();
+            Destroy(collision.gameObject);
             cherries += 1;
             cherryCounter.text = cherries.ToString();
         }
     }
     private bool OnCollisionEnter2D(Collision2D obj)
     {
+        Frog frog = obj.gameObject.GetComponent<Frog>();
+        Opossum opossum = obj.gameObject.GetComponent<Opossum>();
         if (obj.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
@@ -145,7 +145,9 @@ public class PlayerControl : MonoBehaviour
         {
             if(state == State.falling)
             {
-                Destroy(obj.gameObject);
+/*                Destroy(obj.gameObject);*/
+/*                frog.JumpedOn();*/
+                opossum.JumpedOn();
             }
             else
             {

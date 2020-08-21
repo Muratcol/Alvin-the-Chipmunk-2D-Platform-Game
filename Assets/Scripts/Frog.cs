@@ -70,6 +70,6 @@ public class Frog : MonoBehaviour
     }
     private void Death()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

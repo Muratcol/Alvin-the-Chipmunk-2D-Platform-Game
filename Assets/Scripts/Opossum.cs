@@ -53,4 +53,13 @@ public class Opossum : MonoBehaviour
         }
 
     }
+
+    public void JumpedOn()
+    {
+        anim.SetTrigger("Death");
+    }
+    private void Death()
+    {
+        Destroy(this.gameObject);
+    }
 }
