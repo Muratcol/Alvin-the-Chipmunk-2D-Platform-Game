@@ -135,6 +135,7 @@ public class PlayerControl : MonoBehaviour
     {
         Frog frog = obj.gameObject.GetComponent<Frog>();
         Opossum opossum = obj.gameObject.GetComponent<Opossum>();
+        Eagle eagle = obj.gameObject.GetComponent<Eagle>();
         if (obj.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
@@ -145,9 +146,8 @@ public class PlayerControl : MonoBehaviour
         {
             if(state == State.falling)
             {
-/*                Destroy(obj.gameObject);*/
-/*                frog.JumpedOn();*/
                 opossum.JumpedOn();
+                frog.JumpedOn();
             }
             else
             {
