@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour
     private Animator anim;
     private Collider2D coll;
     public BoxCollider2D charCol;
+    private AudioSource footstep;
     
     [SerializeField] private LayerMask ground;
     [SerializeField] private int cherries = 0;
@@ -28,6 +29,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
+        footstep = GetComponent<AudioSource>();
     } 
     // Update is called once per frame
     private void Update()
@@ -190,6 +192,11 @@ public class PlayerControl : MonoBehaviour
             //Enemy is at left side of character. And character get damaged and move right
             rb.velocity = new Vector2(hurtForce, rb.velocity.y);
         }
+    }
+
+    private void Footsteps()
+    {
+        footstep.Play();
     }
 }
 
