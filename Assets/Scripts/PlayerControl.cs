@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     private Animator anim;
     private Collider2D coll;
     public BoxCollider2D charCol;
-    private AudioSource footstep;
+/*    private AudioSource footstep;*/
     
     [SerializeField] private LayerMask ground;
     [SerializeField] private int cherries = 0;
@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Text cherryCounter;
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private float hurtAnimationDuration = 1.0f;
+    [SerializeField] private AudioSource cherryCollectSFX;
+    [SerializeField]private AudioSource footstep;
+
     private bool isJumping;
     private enum State { idle, running, jumping, falling, hurt }
     private State state = State.idle;
@@ -29,7 +32,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-        footstep = GetComponent<AudioSource>();
+/*        footstep = GetComponent<AudioSource>();*/
     } 
     // Update is called once per frame
     private void Update()
@@ -129,6 +132,7 @@ public class PlayerControl : MonoBehaviour
         if(collision.tag == "Collectable")
         {
             Destroy(collision.gameObject);
+            cherryCollectSFX.Play();
             cherries += 1;
             cherryCounter.text = cherries.ToString();
         }
