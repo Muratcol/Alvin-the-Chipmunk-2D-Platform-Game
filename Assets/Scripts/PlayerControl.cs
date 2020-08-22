@@ -12,8 +12,8 @@ public class PlayerControl : MonoBehaviour
     private Animator anim;
     private Collider2D coll;
     public BoxCollider2D charCol;
-/*    private AudioSource footstep;*/
-    
+    /*    private AudioSource footstep;*/
+
     [SerializeField] private LayerMask ground;
     [SerializeField] private int cherries = 0;
     [SerializeField] private float moveSpeed = 5f;
@@ -22,7 +22,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float hurtForce = 10f;
     [SerializeField] private float hurtAnimationDuration = 1.0f;
     [SerializeField] private AudioSource cherryCollectSFX;
-    [SerializeField]private AudioSource footstep;
+    [SerializeField] private AudioSource footstep;
+    [SerializeField] private AudioSource jumpSFX;
+    [SerializeField] private AudioSource hurtSFX;
 
     private bool isJumping;
     private enum State { idle, running, jumping, falling, hurt }
@@ -32,7 +34,6 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
-/*        footstep = GetComponent<AudioSource>();*/
     } 
     // Update is called once per frame
     private void Update()
@@ -114,6 +115,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && coll.IsTouchingLayers(ground))
         {
             rb.AddForce(new Vector2(0f, jumpingHeight), ForceMode2D.Impulse);
+            jumpSFX.Play();
             isJumping = true;
             if(rb.velocity.y < .1f)
             {
@@ -186,6 +188,7 @@ public class PlayerControl : MonoBehaviour
     private void characterHurt(Collision2D obj)
     {
         state = State.hurt;
+        hurtSFX.Play();
         if (obj.gameObject.transform.position.x > transform.position.x)
         {
             //Enemy is at right side of character. And character get damaged and move left
