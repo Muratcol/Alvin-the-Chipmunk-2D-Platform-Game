@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class Frog : MonoBehaviour
+public class Frog : Enemy
 {
     private Collider2D coll;
 
@@ -12,17 +12,16 @@ public class Frog : MonoBehaviour
     [SerializeField] private float leftWaypoint;
     [SerializeField] private float rightWaypoint;
     public Rigidbody2D rb;
-    private Animator anim;
     [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
     private enum State { idle, jumping, falling }
     private State state = State.idle;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
     }
 
@@ -60,14 +59,5 @@ public class Frog : MonoBehaviour
             rb.velocity = new Vector2(jumpLength, jumpHeight);          
         }
 
-    }
-
-    public void JumpedOn()
-    {
-        anim.SetTrigger("Death");
-    }
-    private void Death()
-    {
-        Destroy(this.gameObject);
     }
 }

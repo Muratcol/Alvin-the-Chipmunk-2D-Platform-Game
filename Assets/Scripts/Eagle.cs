@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class Eagle : MonoBehaviour
+public class Eagle : Enemy
 {
     private Collider2D coll;
 
@@ -11,16 +11,15 @@ public class Eagle : MonoBehaviour
     [SerializeField] private float flightRangeTop;
     [SerializeField] private float flightRangeBottom;
     public Rigidbody2D rb;
-    private Animator anim;
 
     private bool atTop = true;
     private bool atBottom = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
     }
 
@@ -52,13 +51,5 @@ public class Eagle : MonoBehaviour
             rb.velocity = new Vector2(0, flightSpeed);
         }
 
-    }
-    public void JumpedOn()
-    {
-        anim.SetTrigger("Death");
-    }
-    private void Death()
-    {
-        Destroy(this.gameObject);
     }
 }

@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class Opossum : MonoBehaviour
+public class Opossum : Enemy
 {
     private Collider2D coll;
-
     [SerializeField] private float moveSpeed;
     [SerializeField] private float leftWaypoint;
     [SerializeField] private float rightWaypoint;
     public Rigidbody2D rb;
-    private Animator anim;
     [SerializeField] private LayerMask ground;
 
     private bool facingLeft = true;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
     }
 
@@ -54,12 +52,4 @@ public class Opossum : MonoBehaviour
 
     }
 
-    public void JumpedOn()
-    {
-        anim.SetTrigger("Death");
-    }
-    private void Death()
-    {
-        Destroy(this.gameObject);
-    }
 }
