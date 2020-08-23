@@ -11,6 +11,8 @@ Visual and ease of use improvements will be added soon.
 ---
 ## Some screenshots of game
 
+![01SS](/C:/Users/Murat/Desktop/gameSS01.png)
+
 ## Requirements
 
 For development, you will need Unity and Visual Studio installed in your environement.
